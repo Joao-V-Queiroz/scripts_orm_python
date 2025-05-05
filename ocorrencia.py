@@ -32,7 +32,7 @@ class Ocorrencia(base):
 	id_tbDP = sa.Column(sa.INTEGER, sa.ForeignKey("tbDP.id", ondelete="NO ACTION", onupdate="CASCADE")) # ID do departamento
 	id_tbMunicipio = sa.Column(sa.INTEGER, sa.ForeignKey("tbMunicipio.id", ondelete="NO ACTION", onupdate="CASCADE")) # ID do município
 	ano = sa.Column(sa.CHAR(4), nullable=False) # Ano da ocorrência
-	mes = sa.Column(sa.VARCHAR(2), nullable=False) # Mês da ocorrência
+	mes = sa.Column(sa.CHAR(2), nullable=False) # Mês da ocorrência
 	ocorrencia = sa.Column(sa.VARCHAR(100), nullable=False) # Descrição da ocorrência
 	quantidade = sa.Column(sa.INTEGER, nullable=False) # Quantidade de ocorrências
 
