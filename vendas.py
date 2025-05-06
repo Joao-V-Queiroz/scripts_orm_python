@@ -44,7 +44,7 @@ class Vendedor(base):
 	__tablename__ = "vendedores"
 
 	id = sa.Column(sa.INTEGER, primary_key=True, index = True) # ID do vendedor
-	cpf = sa.Column(sa.CHAR(14), unique=True, nullable=False) # CPF do vendedor
+	cpf = sa.Column(sa.VARCHAR(14), unique=True, nullable=False) # CPF do vendedor
 	nome = sa.Column(sa.VARCHAR(100), nullable=False) # Nome do vendedor
 	email = sa.Column(sa.VARCHAR(50), nullable=False, unique=True) # Email do vendedor
 	genero = sa.Column(sa.CHAR(1)) # Gênero do vendedor
