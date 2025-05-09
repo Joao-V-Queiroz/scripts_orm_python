@@ -10,9 +10,11 @@ endereco = "C:\\Users\\joaov\\OneDrive\\Documentos\\pucrs_pos_fullstack\\Banco d
 
 #variáveis com o nome dos arquivos de dados
 municipio = pd.read_csv(endereco + "municipio.csv",sep=",")
+departamento = pd.read_csv(endereco + "DP.csv",sep=",")
 
 #Coleta os dados dos arquivos para dentro do Python
 tbMunicipio = pd.DataFrame(municipio)
+tbDP = pd.DataFrame(departamento)
 
 #Criando a engrenagem de conexão com o BD
 engine = sa.create_engine("sqlite:///BD//ocorrencia.db")
@@ -48,6 +50,23 @@ try:
     print("Todos os registros foram inseridos com sucesso!")
 except Exception as e:
     print(f"Erro ao inserir múltiplos registros: {e}")
+    
+#######################
+# DEPARTAMENTO 
+#######################
+#Algoritmo para inserção de dados, utilziando o DataFrame tbDP
+#Transforma os dados em uma lista, correlacionando os registros/linhas/tuplas, através do método dicionário (to_dict)    
+DadosDepartamento = tbDP.to_dict(orient='records')
+
+#Inserindo dados a partir de uma conexão com a engrenagem de BD
+try:
+    query = sa.text("INSERT INTO tbDP (id, nome, endereco) VALUES (:id, :nome, :endereco)")
+    conn.execute(query, DadosDepartamento)  # Insere todos os registros
+    conn.commit()
+    sessao.commit()
+    print("Todos os registros foram inseridos com sucesso!")
+except Exception as e:
+    print(f"Erro ao inserir múltiplos registros: {e}")    
     
 #Encerrando as sessões abertas
 sessao.close()
