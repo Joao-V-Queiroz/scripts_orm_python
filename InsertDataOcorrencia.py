@@ -34,8 +34,8 @@ except Exception as e:
 metaData = sa.MetaData()
 
 #iniciando um sessão com o banco de dados
-Sessao = orm.sessionmaker(bind=engine) #Bind é um argumento que remete a vincular
-sessao = Sessao()
+Session = orm.sessionmaker(bind=engine) #Bind é um argumento que remete a vincular
+session = Session()
 
 #######################
 # MUNICÍPIO 
@@ -49,7 +49,7 @@ sessao = Sessao()
 #     query = sa.text("INSERT INTO tbMunicipio (id, municipio, regiao) VALUES (:id, :municipio, :regiao)")
 #     conn.execute(query, DadosMunicipio)  # Insere todos os registros
 #     conn.commit()
-#     sessao.commit()
+#     session.commit()
 #     print("Todos os registros de município foram inseridos com sucesso!")
 # except Exception as e:
 #     print(f"Erro ao inserir múltiplos registros em tbMunicipio: {e}")
@@ -66,7 +66,7 @@ sessao = Sessao()
 #     query = sa.text("INSERT INTO tbDP (id, nome, endereco) VALUES (:id, :nome, :endereco)")
 #     conn.execute(query, DadosDepartamento)  # Insere todos os registros
 #     conn.commit()
-#     sessao.commit()
+#     session.commit()
 #     print("Todos os registros de departamento foram inseridos com sucesso!")
 # except Exception as e:
 #     print(f"Erro ao inserir múltiplos registros em tbDP: {e}")
@@ -81,7 +81,7 @@ sessao = Sessao()
 #     query = sa.text("INSERT INTO tbResponsavelDP (id, id_tbDP, delegado) VALUES (:id, :id_tbDP, :delegado)")
 #     conn.execute(query, DadosResponsavelDP)  # Insere todos os registros
 #     conn.commit()
-#     sessao.commit()
+#     session.commit()
 #     print("Todos os registros de responsável pelo departamento foram inseridos com sucesso!")
 # except Exception as e:
 #     print(f"Erro ao inserir múltiplos registros em tbResponsavelDP: {e}")
@@ -96,12 +96,12 @@ try:
     query = sa.text("INSERT INTO tbOcorrencia (id, id_tbDP, id_tbMunicipio, ano, mes, ocorrencia, quantidade) VALUES (:id, :id_tbDP, :id_tbMunicipio, :ano, :mes, :ocorrencia, :quantidade)")
     conn.execute(query, DadosOcorrencia)  # Insere todos os registros
     conn.commit()
-    sessao.commit()
+    session.commit()
     print("Todos os registros de ocorrência foram inseridos com sucesso!")
 except Exception as e:
     print(f"Erro ao inserir múltiplos registros em tbOcorrencia: {e}")
         
 #Encerrando as sessões abertas
-sessao.close()
+session.close()
 engine.dispose()
 print("Módulo de inserção de dados finalizado!")
